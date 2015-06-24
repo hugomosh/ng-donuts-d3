@@ -2,6 +2,7 @@
   "name": "ng-donuts-d3",
   "version": "0.0.1",
   "dependencies": {
+    "d3": "~3.5.5"
   },
   "devDependencies": {
     "angular": "latest",
