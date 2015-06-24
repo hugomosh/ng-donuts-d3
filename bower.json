@@ -1,12 +1,13 @@
 {
-  "name": "ng-donuts-d3",
-  "version": "0.0.1",
-  "dependencies": {
-    "d3": "~3.5.5"
-  },
-  "devDependencies": {
-    "angular": "latest",
-    "angular-mocks": "latest",
-    "jquery": "latest"
-  }
+    "name": "ng-donuts-d3",
+    "version": "0.0.1",
+    "main": "./src/ng-donuts-d3.js",
+    "dependencies": {
+        "d3": "~3.5.5"
+    },
+    "devDependencies": {
+        "angular": "latest",
+        "angular-mocks": "latest",
+        "jquery": "latest"
+    }
 }

@@ -51,11 +51,13 @@ describe('Module: ngDonutsD3', function() {
     it('should display values of donout directive', function() {
         var elm = compileDirective('donout1');
         console.log(elm.isolateScope().total);
+        expect(elm.isolateScope().value).toBe(50);
+        expect(elm.isolateScope().total).toBe(100);
     });
 
     it('should have 3d library', function() {
         var elm = compileDirective('donout2');
-
+        console.log(elm.link());
         expect(elm.isolateScope().total).toBe(80);
         expect(elm.isolateScope().value).toBe(20);
         expect(elm.text()).toBe('20 - 80');
