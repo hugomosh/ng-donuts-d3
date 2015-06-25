@@ -1,12 +1,13 @@
 'use strict';
 
 describe('Module: ngDonutsD3', function() {
-    var scope, $sandbox, $compile, $timeout;
+    var scope, $sandbox, $compile, $timeout, $window;
 
     // load the controller's module
-    beforeEach(module('hugomosh.ngDonutsD3'));
+    beforeEach(module('ngDonutsD3'));
 
-    beforeEach(inject(function($injector, $rootScope, _$compile_, _$timeout_) {
+    beforeEach(inject(function($injector, $rootScope, _$compile_, _$timeout_, _$window_) {
+        $window = _$window_;
         scope = $rootScope;
         $compile = _$compile_;
         $timeout = _$timeout_;
@@ -39,28 +40,39 @@ describe('Module: ngDonutsD3', function() {
         angular.extend(scope, template.scope || templates['default'].scope);
         var $element = $(template.element).appendTo($sandbox);
         $element = $compile($element)(scope);
-        scope.$digest();
+        //scope.$digest();
+        scope.$apply();
         return $element;
     }
 
     it('should correctly display hello world', function() {
-        var elm = compileDirective();
-        expect(elm.text()).toBe('hello world');
+        var element = compileDirective();
+        expect(element.text()).toBe('hello world');
     });
 
     it('should display values of donout directive', function() {
-        var elm = compileDirective('donout1');
-        console.log(elm.isolateScope().total);
-        expect(elm.isolateScope().value).toBe(50);
-        expect(elm.isolateScope().total).toBe(100);
+        var element = compileDirective('donout1');
+        expect(element.isolateScope().value).toBe(50);
+        expect(element.isolateScope().total).toBe(100);
     });
 
     it('should have 3d library', function() {
-        var elm = compileDirective('donout2');
-        console.log(elm.link());
-        expect(elm.isolateScope().total).toBe(80);
-        expect(elm.isolateScope().value).toBe(20);
-        expect(elm.text()).toBe('20 - 80');
+        var element = compileDirective('donout2');
+        expect(element.isolateScope().total).toBe(80);
+        expect(element.isolateScope().value).toBe(20);
+    });
+
+    it('should contain an svg', function() {
+        var element = compileDirective('donout2');
+        //console.log(elm.find('svg'));
+        expect(element.find('svg').length).toBe(1);
+    });
+
+    it('should have width == height', function() {
+        var element = compileDirective('donout2');
+        console.log(element.prop('offsetWidth'), element.prop('offsetHeight'));
+
+        expect(element.prop('offsetHeight')).toBe(element.prop('offsetWidth'));
     });
 
 });
