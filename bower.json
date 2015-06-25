@@ -1,7 +1,7 @@
 {
     "name": "ng-donuts-d3",
     "version": "0.0.1",
-    "main": "./src/ng-donuts-d3.js",
+    "main": "./dist/ng-donuts-d3.js",
     "dependencies": {
         "d3": "~3.5.5"
     },
