@@ -273,7 +273,7 @@ angular.module('ngDonutsD3', [])
             drawDout();
             scope.$watch('value', function(newValue, oldValue) {
                 if (newValue) {
-                    console.log('Build arc3');
+                    //console.log('Build arc3');
                     drawDout();
                 }
             });
