@@ -110,11 +110,9 @@ angular.module('ngDonutsD3', []).directive('myDirective', function () {
         scope.total = 100;
       }
       scope.percentage = scope.value / scope.total;
-      console.log(scope.colorfun);
-      console.log(Object.prototype.toString.call(scope.colorfun));
-      if (scope.colorfun && Object.prototype.toString.call(scope.colorfun) !== '[object Function]') {
+      if (scope.color) {
         scope.colorfun = function funcionColor() {
-          return scope.colorfun.removeDiacritics();
+          return String(scope.color).replace('\'', '');
         };
       } else if (!scope.colorfun) {
         scope.colorfun = function funcionColor(color) {
@@ -135,17 +133,13 @@ angular.module('ngDonutsD3', []).directive('myDirective', function () {
       var rawSvg = element.find('svg')[0];
       //Get the manipulable object
       var svg = d3.select(rawSvg);
-      console.log(element.height() + ' ' + element.prop('offsetHeight'));
-      element.on('click', function () {
-        element.css({ 'background-color': 'azure' });
-      });
       var minLength = Math.min(element.width(), element.height());
       if (!minLength || minLength === 0) {
         minLength = 100;
       }
       svg.style('width', '100%').style('height', '100%').attr('viewBox', '0, 0, ' + minLength + ', ' + minLength).attr('preserveAspectRatio', 'xMinYMin');
       var arco, resu, textoCentro;
-      var frontArc, result, textoCentro;
+      var frontArc, result, textCentered;
       var breadthPercentage = 0.05;
       var breadth = minLength * breadthPercentage;
       var paddingRadius = Math.ceil(breadth * 0.3);
@@ -174,15 +168,29 @@ angular.module('ngDonutsD3', []).directive('myDirective', function () {
           return scope.colorfun(scope.percentage);
         });
         result.transition().duration(2000).call(arcTween, scope.percentage * τ);
+        //Add text
+        if (scope.text) {
+          var fontSize = fontSize = radius / 2;
+          textCentered = g.append('text').text(scope.text).attr('text-anchor', 'middle').attr('dx', 2).attr('style', 'font-size : ' + fontSize);
+          textCentered.attr('dy', fontSize / 3);
+        }
       };
       drawDout();
+      scope.$watch('value', function (newValue, oldValue) {
+        if (newValue) {
+          console.log('Build arc3');
+          drawDout();
+        }
+      });
     };
     return {
       restrict: 'EAC',
       scope: {
-        value: '=',
+        value: '=?',
         total: '=',
-        colorfun: '=?'
+        text: '=?',
+        colorfun: '=?',
+        color: '@'
       },
       template: '<svg class="donout-chart-svg"></svg>',
       link: linkFunction
