@@ -5,6 +5,15 @@
     "dependencies": {
         "d3": "~3.5.5"
     },
+    "ignore": [
+        "node_modules",
+        "bower_components",
+        "src",
+        "test",
+        "gulpfile.js",
+        "karma.conf.js",
+        "examples"
+    ],
     "devDependencies": {
         "angular": "latest",
         "angular-mocks": "latest",
