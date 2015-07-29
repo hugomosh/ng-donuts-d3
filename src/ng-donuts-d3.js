@@ -264,7 +264,7 @@ angular.module('ngDonutsD3', [])
                         .text(scope.text)
                         .attr('text-anchor', 'middle')
                         .attr('dx', 2)
-                        .attr('style', 'font-size : ' + fontSize);
+                        .attr('style', 'font-size : ' + fontSize + 'px');
                     textCentered.attr('dy', fontSize / 3);
                 }
             };

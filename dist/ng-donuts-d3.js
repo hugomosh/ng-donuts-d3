@@ -171,7 +171,7 @@ angular.module('ngDonutsD3', []).directive('myDirective', function () {
         //Add text
         if (scope.text) {
           var fontSize = fontSize = radius / 2;
-          textCentered = g.append('text').text(scope.text).attr('text-anchor', 'middle').attr('dx', 2).attr('style', 'font-size : ' + fontSize);
+          textCentered = g.append('text').text(scope.text).attr('text-anchor', 'middle').attr('dx', 2).attr('style', 'font-size : ' + fontSize + 'px');
           textCentered.attr('dy', fontSize / 3);
         }
       };
