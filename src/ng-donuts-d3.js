@@ -3,7 +3,6 @@
 
 angular.module('ngDonutsD3', [])
     .directive('myDirective', function() {
-
         return {
             restrict: 'EAC',
             scope: true,
@@ -35,9 +34,7 @@ angular.module('ngDonutsD3', [])
                     };
                 }
 
-
                 var d3 = $window.d3; //Obtener objeto d3
-                console.log(d3);
                 var rawSvg = element.find('svg')[0];
                 var svg = d3.select(rawSvg);
                 if (!element.height()) {
@@ -119,7 +116,8 @@ angular.module('ngDonutsD3', [])
                             .attr('text-anchor', 'middle')
                             .attr('dx', 2)
                             .attr('class', 'arcod3-texto');
-                        fontSize = textoCentro.style('font-size').replace('px', '');
+                        fontSize = textoCentro.style('font-size');
+                        fontSize = fontSize.replace('px', '');
                         textoCentro.attr('dy', fontSize / 3);
                         //textoCentro.select(this).attr('dy',fontSize/3 );
                         //console.log();
